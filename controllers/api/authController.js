@@ -8,28 +8,35 @@ exports.registerProcess = async (req, res, next) => {
         await User.userValidation(req.body);
         const { email, password } = req.body;
 
+        const firstUser = await User.findOne({});
         const user = await User.findOne({ email });
+
         if (user) {
-            const error = new Error ("Email address is already in use")
-            error.statusCode = 422
-            throw error
+            const error = new Error("Email address is already in use");
+            error.statusCode = 422;
+            throw error;
         } else {
-            await User.create({ email, password });
-            res.status(201).json({ message : "Registration was successful"})
+            if (firstUser) {
+                await User.create({ email, password });
+            } else {
+                await User.create({ email, password, admin: true });
+            }
+            res.status(201).json({ message: "Registration was successful" });
         }
     } catch (err) {
-        next(err)
-        console.log(err)
+        next(err);
+        console.log(err);
     }
 };
-
 
 exports.loginProcess = async (req, res, next) => {
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            const error = new Error("We cannot find an account with this e-mail address");
+            const error = new Error(
+                "We cannot find an account with this e-mail address"
+            );
             error.statusCode = 404;
             throw error;
         }
@@ -40,7 +47,7 @@ exports.loginProcess = async (req, res, next) => {
                     user: {
                         userId: user._id.toString(),
                         email: user.email,
-                        admin: user.admin
+                        admin: user.admin,
                     },
                 },
                 process.env.JWT_SECRET
@@ -56,9 +63,8 @@ exports.loginProcess = async (req, res, next) => {
     }
 };
 
-
 exports.logout = (req, res, next) => {
-    req.session = null
+    req.session = null;
     req.logout();
     res.redirect("/");
 };
