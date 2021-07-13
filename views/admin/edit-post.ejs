@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-11">
+            <div class=" d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                <h2>Edit Post</h2>
+            </div>
+            <%- include("../includes/errorMessage") %>
+                <form class="form-horizontal" action="/dashboard/edit-post/<%= post._id %>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group row ">
+                        <div class="col-8">
+                            <label for="title" class="control-label font-weight-bold">Title</label>
+                            <input class="form-control" autofocus type="text" name="title" id="title"
+                                value="<%= post.title %>">
+                        </div>
+                        <div class="col-4">
+                            <label for="Status" class="control-label font-weight-bold">Status</label>
+                            <select name="status" class="form-control" id="status">
+                                <option value="private" <%=(post.status==="private" ) ? "selected" : "" %>>Private
+                                </option>
+                                <option value="public" <%=(post.status==="public" ) ? "selected" : "" %>>Public</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group row mt-4 ">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class=" input-group-prepend">
+                                <button class=" btn btn-outline-secondary" type="button" id="uploadImage">
+                                    Upload Image
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class=" custom-file">
+                            <input type="file" class="custom-file-input" id="images">
+                            <label for="images" class="custom-file-label" id="imageStatus">Select Image</label>
+                        </div>    
+                    </div>
+                </div> -->
+                    <div class="form-group row ">
+                        <div class="col">
+                            <label for="body" class="control-label font-weight-bold">body</label>
+                            <div class="card card-body">
+                                <textarea class="form-control" name="body" id="body"> <%= post.body %> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+                        <div class="col">
+                            <label for="thumbnail" class="control-label font-weight-bold">Thumbnail</label>
+                            <input class="form-control" type="file" name="thumbnail" id="thumbnail">
+                        </div>
+                    </div>
+                    <div class="form-group row  ">
+                        <div class="col">
+                            <button type="submit" class="btn btn-success">Edit</button>
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>

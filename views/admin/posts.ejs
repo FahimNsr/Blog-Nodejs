@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col">
+        <section class="card">
+            <header class="card-header">Posts Table
+                <a href="/dashboard/add-post" class="btn btn-success fa fa-plus pull-right "> New Post</a>
+            </header>
+            <div class="card-body">
+                <div class="adv-table">
+                    <table class="display table table-bordered table-striped" id="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Image</th>
+                                <th class="text-center">Title</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Creator</th>
+                                <th class="text-center">Settings</th>
+                                <th class="text-center">Created Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let post of posts) { %>
+                                <tr class="text-center">
+                                    <td class="center"><img
+                                            src="http://localhost:4000/uploads/thumbnails/<%= post.thumbnail %>"
+                                            width="50px" height="50px" alt="<%= post.title %>">
+                                    </td>
+                                    <td><a href="/dashboard/<%= post.id %>">
+                                            <%= post.title %>
+                                        </a></td>
+                                    <td>
+                                        <span class="badge <%= post.status === "public" ? "badge-success" : "badge-warning" %> ">
+                                            <%= post.status %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <%= post.user.email %>
+                                    </td>
+
+                                    <td>
+                                        <a href="/dashboard/edit-post/<%= post._id %>" class="btn btn-primary btn-sm ">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href="/dashboard/del-post/<%= post._id %>" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-trash-o "></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <%= post.createdAt.toString().substr(4,17) %>
+                                    </td>
+
+                                </tr>
+                                <% } %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th class="text-center">Image</th>
+                                <th class="text-center">Title</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Creator</th>
+                                <th class="text-center">Settings</th>
+                                <th class="text-center">Created Time</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<%- contentFor('head') %>
+    <!--dynamic table-->
+    <link href="/admin/assets/advanced-datatable/media/css/demo_page.css" rel="stylesheet" />
+    <link href="/admin/assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/admin/assets/data-tables/DT_bootstrap.css" />

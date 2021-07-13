@@ -1,0 +1,35 @@
+<!-- blog page content area start -->
+<section class="blog-page-content-area">
+    <div class="container">
+        <div class="row">
+            <% for(let post of posts) { %>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-our-story-item">
+                        <!-- single our story item -->
+                        <div class="thumb">
+                            <a href="/posts/<%= post._id %>"> <img src="http://localhost:4000/uploads/thumbnails/<%= post.thumbnail %>"
+                                    alt="our story" width="350px" height="267px">
+                            </a>
+                        </div>
+                        <div class="conent">
+                            <span class="time">
+                                <%= post.createdAt.toString().substr(4,11) %>
+                            </span>
+                            <a href="/posts/<%= post._id %>">
+                                <h4 class="title">
+                                    <%= post.title %>
+                                </h4>
+                            </a>
+                            <p>
+                                <%- post.body.substring(0,128) %> ...
+                            </p>
+                        </div>
+                    </div><!-- //.single our story item -->
+                </div>
+                <% } %>
+
+        </div>
+    </div>
+</section>
+<!-- blog page content area end -->

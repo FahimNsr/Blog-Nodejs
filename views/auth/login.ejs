@@ -1,0 +1,93 @@
+
+<!-- login page content area start -->
+<div class="login-page-content-area">
+    <div class="container">
+        <%- include("../includes/seccessMessage") %>
+        <% if(error.length > 0) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <% } %>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="login-page-wrapper"><!-- login page wrapper -->
+                    <div class="or">
+                        <span>or</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="left-content-area">
+                                <div class="top-content ">
+                                    <h4 class="title d-flex justify-content-center">Don't have Account?</h4>
+                                </div>
+                                <div class="bottom-content">
+                                    <div class="right-content">
+                                        <ul>
+                                            <li class="active">
+                                                <a href="/register">Register</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="bottom-content">
+                                    <div class="right-content">
+                                        <ul>
+                                            <li class="active">
+                                                <a href="/#">Forgot your password?</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="right-contnet-area">
+                                <div class="top-content">
+                                    <h4 class="title">Account Login</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                </div>
+                                <div class="bottom-content">
+                                    <form action="/login" method="POST" class="login-form">
+                                        <div class="form-element">
+                                            <input
+                                            name="email"
+                                            id="email"
+                                            type="email"
+                                            class="input-field"
+                                            placeholder="Enter Username or Email">
+                                        </div>
+                                        <div class="form-element">
+                                            <input
+                                            name="password"
+                                            id="password"
+                                            type="password"
+                                            class="input-field"
+                                            placeholder="Enter Password">
+                                        </div>
+                                        <div class="g-recaptcha" data-sitekey="6Lf4R6YUAAAAAHEHR6F7YLQzYwQME3i9Q3XLaVcS"></div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="btn-wrapper">
+                                                <button type="submit" class="submit-btn mt-3">Login</button>
+                                                <label>
+                                                    Remember me
+                                                    <input name="remember" type="checkbox" value="remember-me" />
+                                                </label>
+                                            </div>
+                                            <!-- <a href="#" class="link">Forget password?</a> -->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- //.login page wrapper -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- login page content area end -->

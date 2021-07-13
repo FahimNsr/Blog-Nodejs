@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/home/css/bootstrap.min.css">
+    <!-- icofont -->
+    <link rel="stylesheet" href="/home/css/fontawesome.min.css">
+    <!-- select 2  -->
+    <link rel="stylesheet" href="/css/select2.min.css">
+    <!-- animate.css -->
+    <link rel="stylesheet" href="/home/css/animate.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="/home/css/owl.carousel.min.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="/home/css/magnific-popup.css">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="/home/css/style.css">
+    <!-- responsive -->
+    <link rel="stylesheet" href="/home/css/responsive.css">
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+    <!-- support bar area start -->
+    <div class="support-bar-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="left-content-area">
+                        <!-- left content area -->
+                        <div class="language-picker">
+                            <div class="default">
+                                <% if (getLocale()=="en" ) { %>
+                                    <div class="slang-wrap">
+                                        <div class="img">
+                                            <img src="/home/img/lang-flag/enf.jpg" alt="language flag">
+                                        </div>
+                                        <a href="/lang/en" class="name"> English <i class="fas fa-angle-down"></i></a>
+                                    </div>
+                                    <ul class="all-lang">
+                                        <li>
+                                            <div class="slang-wrap">
+                                                <div class="img">
+                                                    <img src="/home/img/lang-flag/ger.jpg" alt="language flag">
+                                                </div>
+                                                <a href="/lang/de" class="name"> Deutsch </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <% } else if (getLocale()=="de" ) { %>
+                                        <div class="slang-wrap">
+                                            <div class="img">
+                                                <img src="/home/img/lang-flag/ger.jpg" alt="language flag">
+                                            </div>
+                                            <a href="/lang/de" class="name"> Deutsch <i class="fas fa-angle-down"></i>
+                                            </a>
+                                        </div>
+                                        <ul class="all-lang">
+                                            <li>
+                                                <div class="slang-wrap">
+                                                    <div class="img">
+                                                        <img src="/home/img/lang-flag/enf.jpg" alt="language flag">
+                                                    </div>
+                                                    <a href="/lang/en" class="name"> English </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <% } %>
+                            </div>
+                        </div>
+                        <div class="currency-picker">
+                            <div class="default">
+                                <div class="slang-wrap">
+                                    <div class="name ">USD <i class="fas fa-angle-down"></i></div>
+                                </div>
+                                <ul class="all-lang">
+                                    <li>
+                                        <div class="slang-wrap">
+                                            <div class="name">EUR </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- //.left content area -->
+                    <!-- right content area -->
+                    <div class="right-content-area">
+                        <ul>
+                            <% if (req.user) { %>
+                                <li>
+                                    <a class="<%= (path === '/profile') ? 'font-weight-bold' : '' %>" href="/profile">
+                                        <%= req.user.email %> | <%= __('Profile')%>
+                                    </a>
+                                </li>
+                                <% if (req.user.admin) { %>
+                                    <li>
+                                        <a href="/dashboard">
+                                            <%= __('Dashboard')%>
+                                        </a>
+                                    </li>
+                                    <% } %>
+
+                                        <li>
+                                            <a href="/logout">
+                                                <%= __('Logout')%>
+                                            </a>
+                                        </li>
+                                        <% } else { %>
+                                            <li>
+                                                <a class="<%= (path === '/login') ? 'font-weight-bold' : '' %>"
+                                                    href="/login">
+                                                    <%= __('Login')%>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="<%= (path === '/register') ? 'font-weight-bold' : '' %>"
+                                                    href="/register">
+                                                    <%= __('Register')%>
+                                                </a>
+                                            </li>
+                                            <% } %>
+                        </ul>
+                    </div><!-- //. right content area -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- navbar area start -->
+    <nav class="navbar navbar-area navbar-expand-lg navbar-light home-4">
+        <div class="container nav-container">
+            <div class="collapse navbar-collapse" id="mirex">
+                <!-- navbar collapse start -->
+                <ul class="navbar-nav">
+                    <!-- navbar- nav -->
+                    <li class="nav-item dropdown <%= (path === '/home') ? 'active' : '' %>">
+                        <a class="nav-link pl-0 " href="/">
+                            <%= __('Home')%>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item dropdown mega-menu <%= (path === '/products') ? 'active' : '' %>">
+                        <a class="nav-link dropdown-toggle" href="/products">
+                            <%= __('Categories')%>
+                        </a>
+                        <div class="mega-menu-wrapper">
+                            <div class="container mega-menu-container">
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="mega-menu-columns">
+                                            <h6 class="title">Inner Pages</h6>
+                                            <ul class="menga-menu-page-links">
+                                                <li><a href="category.html">Category</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="mega-menu-columns">
+                                            <h6 class="title">Other Pages</h6>
+                                            <ul class="menga-menu-page-links">
+                                                <li><a href="product_upload.html">Product Upload</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="mega-menu-columns">
+                                            <h6 class="title">Other Pages</h6>
+                                            <ul class="menga-menu-page-links">
+                                                <li><a href="search.html">Search</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li> -->
+                    <li class="nav-item <%= (path === '/posts') ? 'active' : '' %> ">
+                        <a class="nav-link" href="/posts">Blog</a>
+                    </li>
+                    <li class="nav-item <%= (path === '/contact') ? 'active' : '' %>">
+                        <a class="nav-link" href="/contact">
+                            <%= __('Contact')%>
+                        </a>
+                    </li>
+                    <li class="nav-item <%= (path === '/about') ? 'active' : '' %>">
+                        <a class="nav-link" href="/about">
+                            <%= __('About')%>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.navbar-nav -->
+                <div class="right-btn-wrapper">
+                    <ul>
+                        <li class="search" id="search"><i class="fas fa-search"></i> </li>
+                        <!-- <li class="cart" id="cart"><i class="fas fa-shopping-basket "></i>
+                            <span class="badge ">2</span>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+            <!-- navbar collapse end -->
+            <!-- /.navbar btn wrapper -->
+        </div>
+    </nav>
+    <!-- navbar area end -->
+    <div class="body-overlay" id="body-overlay"></div>
+    <div class="search-popup" id="search-popup">
+        <form action="http://idealbrothers.thesoftking.com/html/bigenza/bigenja/index.html" class="search-popup-form">
+            <div class="form-element">
+                <input type="text" class="input-field" placeholder="<%= __('Search')%> .....">
+            </div>
+            <button type="submit" class="submit-btn"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <!-- cart sidebar area start -->
+    <div class="cart-sidebar-area" id="cart-sidebar-area">
+        <div class="top-content">
+            <!-- top content -->
+            <a href="/cart" class="title h3 ">
+                <%= __('Shopping cart')%>
+            </a>
+            <span class="side-sidebar-close-btn"><i class="fas fa-times"></i></span>
+        </div><!-- //. top content -->
+        <div class="bottom-content">
+            <!-- bottom content -->
+            <div class="cart-products">
+                <!-- cart product -->
+                <div class="single-product-item">
+                    <!-- single product item -->
+                    <div class="thumb">
+                        <img src="/home/img/recent-review/01.jpg" alt="recent review">
+                    </div>
+                    <div class="content">
+                        <h4 class="title">Footwear Dark</h4>
+                        <div class="price"><span class="pprice">$350.00</span> <del class="dprice">$500.00</del></div>
+                        <a href="#" class="remove-cart">
+                            <%= __('Remove')%>
+                        </a>
+                    </div>
+                </div><!-- //. single product item -->
+                <div class="single-product-item">
+                    <!-- single product item -->
+                    <div class="thumb">
+                        <img src="/home/img/recent-review/02.jpg" alt="recent review">
+                    </div>
+                    <div class="content">
+                        <h4 class="title">Milo Hoverboard</h4>
+                        <div class="price"><span class="pprice">$350.00</span> <del class="dprice">$500.00</del></div>
+                        <a href="#" class="remove-cart">
+                            <%= __('Remove')%>
+                        </a>
+                    </div>
+                </div><!-- //. single product item -->
+                <div class="btn-wrapper">
+                    <a href="/checkout" class="boxed-btn">
+                        <%= __('Checkout')%>
+                    </a>
+                </div>
+            </div> <!-- //. cart product -->
+        </div><!-- //. bottom content -->
+    </div>
+    <!-- cart sidebar area end -->
+    <%- body %>
+
+        <footer class="footer-arae-one">
+            <div class="footer-top-one blue-bg">
+                <!-- footer top one-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-widget about">
+                                <div class="widget-body">
+                                    <ul class="contact-info-list">
+                                        <li>
+                                            <div class="single-contact-info">
+                                                <div class="icon">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <span class="details">198 West 21th Street, Suite 721, New York NY
+                                                        10010</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-contact-info">
+                                                <div class="icon">
+                                                    <i class="fas fa-envelope"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <span class="details">youremail@yourdomain.com</span>
+                                                    <span class="details">example@yourdomain.com</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-contact-info">
+                                                <div class="icon">
+                                                    <i class="fas fa-phone"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <span class="details">+88 (0) 101 0000 000</span>
+                                                    <span class="details">+99 (989) 101 0000 000</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-widget">
+                                <div class="widget-title">
+                                    <h4 class="title">Shopping Guide</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <ul class="page-list">
+                                        <li><a href="/blog">-- Blog</a></li>
+                                        <li><a href="/faq">-- Faq</a></li>
+                                        <li><a href="/privacy_policy">-- Privacy-Policy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-widget">
+                                <div class="widget-title">
+                                    <h4 class="title">Style Adviser</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <ul class="page-list">
+                                        <li><a href="signup.html">-- Your Account</a></li>
+                                        <li><a href="#">-- Order History</a></li>
+                                        <li><a href="track-orders.html">-- Order Tracking</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-widget">
+                                <div class="widget-title">
+                                    <h4 class="title">Information</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <ul class="page-list">
+                                        <li><a href="#">-- Sitemap</a></li>
+                                        <li><a href="/about">-- About us</a></li>
+                                        <li><a href="/contact">-- Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- //.footer top one -->
+            <div class="copyright-area blue-bg">
+                <!-- copyright area -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="copyright-inner">
+                                <!-- copyright inner -->
+                                <div class="left-content-area">
+                                    <span class="copyright-text">Copyright by@Fahim Nasirzadeh - 2021</span>
+                                </div>
+                                <div class="right-content-area">
+                                    <ul class="payment-logo">
+                                        <li>
+                                            <img src="/home/img/payment-logo/01.png" alt="payment logo">
+                                        </li>
+                                        <li>
+                                            <img src="/home/img/payment-logo/02.png" alt="payment logo">
+                                        </li>
+                                        <li>
+                                            <img src="/home/img/payment-logo/03.png" alt="payment logo">
+                                        </li>
+                                        <li>
+                                            <img src="/home/img/payment-logo/04.png" alt="payment logo">
+                                        </li>
+                                        <li>
+                                            <img src="/home/img/payment-logo/05.png" alt="payment logo">
+                                        </li>
+                                        <li>
+                                            <img src="/home/img/payment-logo/06.png" alt="payment logo">
+                                        </li>
+                                        <li>
+                                            <img src="/home/img/payment-logo/07.png" alt="payment logo">
+                                        </li>
+                                        <li>
+                                            <img src="/home/img/payment-logo/08.png" alt="payment logo">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer area one end -->
+
+        <!-- back to top start -->
+        <div class="back-to-top">
+            <i class="fas fa-rocket"></i>
+        </div>
+        <!-- back to top end -->
+
+        <!-- jquery -->
+        <script src="/home/js/jquery.js"></script>
+        <!-- popper -->
+        <script src="/home/js/popper.min.js"></script>
+        <!-- bootstrap -->
+        <script src="/home/js/bootstrap.min.js"></script>
+        <!-- way poin js-->
+        <script src="/home/js/waypoints.min.js"></script>
+        <!-- owl carousel -->
+        <script src="/home/js/owl.carousel.min.js"></script>
+        <!-- magnific popup -->
+        <script src="/home/js/jquery.magnific-popup.js"></script>
+        <!-- wow js-->
+        <script src="/home/js/wow.min.js"></script>
+        <!-- counterup js-->
+        <script src="/home/js/jquery.counterup.min.js"></script>
+        <!-- select 2 -->
+        <script src="/home/js/select2.min.js"></script>
+        <!-- main -->
+        <script src="/home/js/main.js"></script>
+
+        <% if(path==="/login" || path==="/register" ) {%>
+            <script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
+            <% } %>
+
+</body>
+
+</html>
