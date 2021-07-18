@@ -34,27 +34,29 @@ exports.addingPost = async (req, res, next) => {
             .toFile(uploadPath)
             .catch((err) => console.log(err));
 
-        await Post.create({
+        const post = await Post.create({
             ...req.body,
             user: req.userId,
             thumbnail: fileName,
         });
-        res.status(201).json({ message: "New Post added successfully" });
+        res.status(201).json({ post, message: "New Post added successfully" });
     } catch (err) {
         next(err);
-        console.log(err)
+        console.log(err);
     }
 };
-exports.editPost = async (req, res) => {
+exports.editPost = async (req, res, next) => {
     try {
-        const editPost = await Post.findOne({ _id: req.params.id });
+        const post = await Post.findOne({ _id: req.params.id }).populate(
+            "user"
+        );
         if (!post) {
             const error = new Error("There is no post with this ID");
             error.statusCode = 404;
             throw error;
         }
 
-        res.status(200).json({ editPost });
+        res.status(200).json({ post });
     } catch (err) {
         next(err);
     }
@@ -105,9 +107,9 @@ exports.editingPost = async (req, res) => {
         post.body = body;
         post.thumbnail = thumbnail.name ? fileName : post.thumbnail;
 
-        await post.save();
+        const upPost = await post.save();
 
-        res.status(200).json({ message: "Post edited successfully" });
+        res.status(200).json({ upPost, message: "Post edited successfully" });
     } catch (err) {
         next(err);
     }
@@ -119,7 +121,9 @@ exports.delPost = async (req, res, next) => {
             `${appRoot}/public/uploads/thumbnails/${post.thumbnail}`,
             (err) => {
                 if (err) {
-                    const error = new Error("somthing went wrong in delete thumbnail");
+                    const error = new Error(
+                        "somthing went wrong in delete thumbnail"
+                    );
                     error.statusCode = 400;
                     throw error;
                 } else {
