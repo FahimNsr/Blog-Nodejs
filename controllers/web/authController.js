@@ -62,31 +62,11 @@ exports.login = (req, res) => {
 };
 
 exports.loginProcess = async (req, res, next) => {
-  if (!req.body["g-recaptcha-response"]) {
-    req.flash("error", req.__("Please check reCAPTCHA"));
-    return res.redirect("/login");
-  }
-  const secretKey = process.env.CAPTCHA_SECRET_KEY;
-  const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body["g-recaptcha-response"]}
-    &remoteip=${req.connection.remoteAddress}`;
 
-  const response = await fetch(verifyUrl, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-    },
-  });
-  const json = await response.json();
-  if (json.success) {
     passport.authenticate("local", {
       failureRedirect: "/login",
       failureFlash: true,
     })(req, res, next);
-  } else {
-    req.flash("error", "somthing went wrong in reCAPTCHA");
-    res.redirect("/login");
-  }
 };
 
 exports.rememberMe = (req, res) => {
