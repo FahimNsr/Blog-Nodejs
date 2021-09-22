@@ -1,10 +1,9 @@
-# Blog-backend-Nodejs
+# Blog-Nodejs
 
 A nice project with a nice description
 
 ---
 ## Requirements
 
-You will need Node.js, MongoDB and a node global package, NPM, installed in your environement.
-Also please use "sample-config.env".
-Enter in Terminal " npm i " und run project with " npm start ".
+You must installed Node.js and MongoDB on your system.
+Enter in Terminal " npm i " and run project " npm start ".
