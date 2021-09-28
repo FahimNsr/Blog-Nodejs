@@ -34,24 +34,16 @@ exports.loginProcess = async (req, res, next) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            const error = new Error(
-                "We cannot find an account with this e-mail address"
-            );
+            const error = new Error("We cannot find an account with this e-mail address");
             error.statusCode = 404;
             throw error;
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (isMatch) {
-            const token = jwt.sign(
-                {
-                    user: {
-                        userId: user._id.toString(),
-                        email: user.email,
-                        admin: user.admin,
-                    },
-                },
-                process.env.JWT_SECRET
-            );
+            const token = jwt.sign({ userId: user._id.toString(), email: user.email, admin: user.admin }, process.env.JWT_SECRET, {
+                expiresIn: "24h",
+            });
+            console.log(token);
             res.status(200).json({ token, userId: user._id.toString() });
         } else {
             const error = new Error("E-mail or password is incorrect");
