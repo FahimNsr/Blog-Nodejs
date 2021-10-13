@@ -14,7 +14,7 @@ const connectDB = require("./config/db");
 const { setHeaders } = require("./middlewares/headers");
 const { apiErrorHandler } = require("./middlewares/apiErrorHandler");
 // Load Config
-dotEnv.config({ path: "./config/config.env" });
+dotEnv.config({ path: ".env" });
 
 // Database connection
 connectDB();

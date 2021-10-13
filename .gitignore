@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-/node_modules
-config/config.env
+.env
+node_modules
 Dockerfile
 .dockerignore
-=======
-config/config.env
-/node_modules
-Dockerfile
-.dockerignore
->>>>>>> 395f523495244f3db4de9dcac4f9687e078c4e3b
